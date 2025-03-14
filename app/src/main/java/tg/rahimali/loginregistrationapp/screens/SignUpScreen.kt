@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import tg.rahimali.loginregistrationapp.R
+import tg.rahimali.loginregistrationapp.components.CheckBoxComponent
 import tg.rahimali.loginregistrationapp.components.HeadingTextComponent
 import tg.rahimali.loginregistrationapp.components.MyTextField
 import tg.rahimali.loginregistrationapp.components.NormalTextComponent
@@ -56,6 +57,7 @@ fun SignUpScreen() {
                 stringResource(R.string.password),
                 painterResource(R.drawable.ic_lock)
             )
+            CheckBoxComponent(stringResource(R.string.policy))
         }
     }
 }
