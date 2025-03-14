@@ -2,7 +2,13 @@ package tg.rahimali.loginregistrationapp.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -10,22 +16,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import tg.rahimali.loginregistrationapp.R
 
 @Composable
-fun NormalTextComponent(text : String) {
+fun NormalTextComponent(text: String) {
     Text(
         text = text,
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(min = 40.dp),
-        fontSize = 24.sp,
+        fontSize = 20.sp,
         fontWeight = FontWeight.Normal,
         fontStyle = FontStyle.Normal,
         color = colorResource(R.color.colorText),
@@ -35,7 +47,7 @@ fun NormalTextComponent(text : String) {
 
 
 @Composable
-fun HeadingTextComponent(text : String) {
+fun HeadingTextComponent(text: String) {
     Text(
         text = text,
         modifier = Modifier
@@ -51,20 +63,82 @@ fun HeadingTextComponent(text : String) {
 
 
 @Composable
-fun MyTextField(labelValue: String) {
-    val textValue = remember {mutableStateOf("")}
+fun MyTextField(labelValue: String, painterResource: Painter) {
+    val textValue = remember { mutableStateOf("") }
 
     OutlinedTextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(8.dp)),
         label = { Text(text = labelValue) },
         colors = TextFieldDefaults.colors(
             focusedContainerColor = colorResource(R.color.colorPrimary),
             focusedLabelColor = colorResource(R.color.colorPrimary),
             cursorColor = colorResource(R.color.colorPrimary),
+            unfocusedContainerColor = colorResource(R.color.bgColor),
         ),
         keyboardOptions = KeyboardOptions.Default,
         value = textValue.value,
+        leadingIcon = {
+            Icon(
+                painter = painterResource,
+                contentDescription = null,
+            )
+        },
         onValueChange = {
             textValue.value = it
+        }
+    )
+}
+
+
+@Composable
+fun PasswordTextField(labelValue: String, painterResource: Painter) {
+    val password = remember { mutableStateOf("") }
+    val passwordIsVisible = remember { mutableStateOf(false) }
+
+    OutlinedTextField(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(8.dp)),
+        label = { Text(text = labelValue) },
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = colorResource(R.color.colorPrimary),
+            focusedLabelColor = colorResource(R.color.colorPrimary),
+            cursorColor = colorResource(R.color.colorPrimary),
+            unfocusedContainerColor = colorResource(R.color.bgColor),
+        ),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        value = password.value,
+        leadingIcon = {
+            Icon(
+                painter = painterResource,
+                contentDescription = null,
+            )
+        },
+        trailingIcon = {
+            val iconImage = if (passwordIsVisible.value) {
+                Icons.Filled.Visibility
+            } else {
+                Icons.Filled.VisibilityOff
+            }
+
+            val description = if (passwordIsVisible.value) {
+                stringResource(R.string.hide_password)
+            } else {
+                stringResource(R.string.show_password)
+            }
+            IconButton(
+                onClick = { passwordIsVisible.value = !passwordIsVisible.value }
+            ) {
+                Icon(imageVector = iconImage, contentDescription = description)
+            }
+        },
+        // masquer le texte qui s'affiche
+        visualTransformation =
+        if (passwordIsVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
+        onValueChange = {
+            password.value = it
         }
     )
 }

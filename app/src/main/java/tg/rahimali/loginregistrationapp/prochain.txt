@@ -1,0 +1,12 @@
+18min 26sec
+
+----------------------------------------
+            ETAPES
+---------------------------------------
+
+    - Identification des differents ecrans qu'on aura.
+    - Creation d'un package pour contenir les ecrans identifies.
+    - Creation d'un package pour contenir les composants qui se trouvent dans les ecrans
+    - Si on veut, on peut creer un package de composants pour chaque ecrans + Et mettre
+    les composants qui sont communs aux ecrans dans un autre package.
+    ( a utiliser pour de grosses applications)
