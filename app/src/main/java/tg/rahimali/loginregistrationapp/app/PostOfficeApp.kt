@@ -22,7 +22,7 @@ fun PostOfficeApp() {
                 is Screen.SignUpScreen -> {
                     SignUpScreen()
                 }
-                is Screen.TermsAndConditions -> {
+                is Screen.TermsAndConditionsScreen -> {
                     TermsAndConditionsScreen()
                 }
             }

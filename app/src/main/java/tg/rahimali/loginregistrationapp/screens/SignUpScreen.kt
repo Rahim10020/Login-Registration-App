@@ -20,6 +20,8 @@ import tg.rahimali.loginregistrationapp.components.HeadingTextComponent
 import tg.rahimali.loginregistrationapp.components.MyTextField
 import tg.rahimali.loginregistrationapp.components.NormalTextComponent
 import tg.rahimali.loginregistrationapp.components.PasswordTextField
+import tg.rahimali.loginregistrationapp.navigation.PostOfficeAppRouter
+import tg.rahimali.loginregistrationapp.navigation.Screen
 
 
 @Composable
@@ -57,7 +59,12 @@ fun SignUpScreen() {
                 stringResource(R.string.password),
                 painterResource(R.drawable.ic_lock)
             )
-            CheckBoxComponent(stringResource(R.string.policy))
+            CheckBoxComponent(
+                text = stringResource(R.string.policy),
+                onTextSelected = {
+                    PostOfficeAppRouter.navigateTo(Screen.TermsAndConditionsScreen)
+                }
+            )
         }
     }
 }
