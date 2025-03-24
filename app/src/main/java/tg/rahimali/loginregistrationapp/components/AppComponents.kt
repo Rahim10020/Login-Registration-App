@@ -207,6 +207,8 @@ fun ClickableTextComponent(text: String) {
                 .firstOrNull()?.also { span ->
                     Log.d("clickableTextComponent", "{ $span }")
                 }
+
+
         }
     )
 }
